@@ -9,11 +9,28 @@
 import UIKit
 import AVFoundation
 
-func downloadData(id: String, title: UILabel, image: UIImageView, story: UILabel, instructions: UILabel, table: UITableView!, placeholder: UIImageView) {
+func downloadData(id: String, title: UILabel, image: UIImageView, story: UILabel, instructions: UILabel, table: UITableView!, placeholder: UIImageView, taste: String, occasion: String, spirit: String) {
 
+    ingredientsArray.removeAll()
+    nameArray.removeAll()
+    idArray.removeAll()
+    imageArray.removeAll()
+    
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
     
-let mappedURLString = "http://addb.absolutdrinks.com/drinks/" + id + "/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+var mappedURLString = ""
+
+if id != "" {
+    
+ mappedURLString = "http://addb.absolutdrinks.com/drinks/" + id + "/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+    
+} else if taste != "" {
+    mappedURLString = "http://addb.absolutdrinks.com/drinks/tasting/\(taste)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+} else if occasion != "" {
+    mappedURLString = "http://addb.absolutdrinks.com/drinks/for/\(occasion)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+} else if spirit != "" {
+    mappedURLString = "http://addb.absolutdrinks.com/drinks/with/\(spirit)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+}
     
 let mappedURL = NSURL(string: mappedURLString)
 
@@ -23,19 +40,37 @@ if data != nil {
     
     do { let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
         
-        if let ingFormat = jsonData["result"]![0]["ingredients"] as? NSArray {
-               
-            for ingredient in ingFormat {
+        for ingFormat in (jsonData["result"]! as? NSArray)! {
+            
+            var tempText = ""
+            
+            if id == "" {
+            for ingredient in (ingFormat["ingredients"] as? NSArray)! {
                 let ingFormat = ingredient as! [String:String]
-                    ingredientsArray.append(ingFormat["textPlain"]!)
+                    tempText = tempText + "\(ingFormat["textPlain"]!), "
+              
+            }
                 
+                ingredientsArray.append(tempText)
+  
+                
+            } else {
+                
+                for ingredient in (ingFormat["ingredients"] as? NSArray)! {
+                    let ingFormat = ingredient as! [String:String]
+                    ingredientsArray.append(ingFormat["textPlain"]!)
+
+                }
             }
             
-        } else {
-            print("false")
+            
         }
         
+    
+    
             if let items = jsonData["result"] as? NSArray {
+                
+            if items.count == 1  {
             
             for item in items {
                 
@@ -60,16 +95,43 @@ if data != nil {
                         table.reloadData()
                        
                     }
-                    
-                 let downloadImg = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-white/soft-shadow/floor-reflection/\(id).png")!)!)
+                
+                 let downloadImg = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-white/floor-reflection/\(id).png")!)!)
                
                 dispatch_sync(dispatch_get_main_queue()){
                     placeholder.hidden = true 
                     image.image = downloadImg
                 }
 
-                }}
-        
+                }
+                
+            } else if items.count > 1 {
+                
+                for item in items {
+                    
+                    let idPull = item["id"]! as! String
+                    
+                    idArray.append(idPull)
+                    nameArray.append(item["name"]! as! String)
+                    ingredientsArray.append(item["descriptionPlain"]! as! String)
+                    
+                    if let _ = NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-black/172x167/\(idPull)(40).jpg")!) {
+                    
+                    imageArray.append(NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-black/172x167/\(idPull)(40).jpg")!)!)
+                    
+                    } else {
+                        imageArray.append(NSData())
+                    }
+                    
+                    dispatch_sync(dispatch_get_main_queue()){
+                        table.reloadData()
+                    }
+                    
+                }
+                
+            }
+
+        }
     } catch {
         
         print("not a dictionary")
@@ -77,6 +139,8 @@ if data != nil {
     } }
 
     })
+    
+        
 }
 
 

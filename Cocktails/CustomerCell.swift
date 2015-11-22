@@ -11,5 +11,6 @@ import UIKit
 class CustomCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var drinkImg: UIImageView!
     
 }
