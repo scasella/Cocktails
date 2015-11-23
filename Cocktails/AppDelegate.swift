@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("favIDArray") != nil {
+            favIDArray = NSUserDefaults.standardUserDefaults().objectForKey("favIDArray") as! [String]
+        }
         // Override point for customization after application launch.
         return true
     }

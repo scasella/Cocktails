@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="Kmb-Xo-4Kc">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                                 <animations/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cob-Vj-dGL">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Show" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cob-Vj-dGL">
                                 <rect key="frame" x="774" y="914" width="373" height="137"/>
                                 <animations/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
@@ -30,11 +30,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Shelf3.png" translatesAutoresizingMaskIntoConstraints="NO" id="OM4-NR-T3H">
-                                <rect key="frame" x="686" y="493" width="548" height="129"/>
+                                <rect key="frame" x="686" y="506" width="548" height="129"/>
                                 <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XDf-3u-Yzn">
-                                <rect key="frame" x="380" y="618" width="1161" height="298"/>
+                                <rect key="frame" x="380" y="650" width="1161" height="298"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="38"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -48,7 +48,6 @@
                                     <segment title="Spirit"/>
                                     <segment title="Taste"/>
                                     <segment title="Occasion"/>
-                                    <segment title="Random"/>
                                     <segment title="Favorites"/>
                                     <segment title="Search"/>
                                 </segments>
@@ -58,7 +57,7 @@
                                 </connections>
                             </segmentedControl>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WyT-4m-dmc">
-                                <rect key="frame" x="779" y="198" width="364" height="362"/>
+                                <rect key="frame" x="779" y="211" width="364" height="362"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -120,7 +119,7 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="drinkImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="c2O-lo-tcT">
-                                <rect key="frame" x="869" y="355" width="183" height="234"/>
+                                <rect key="frame" x="869" y="368" width="183" height="234"/>
                                 <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKn-G9-eVb">
@@ -130,6 +129,15 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Fav" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-JE-OLp">
+                                <rect key="frame" x="1379" y="870" width="150" height="102"/>
+                                <animations/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Button" image="HeartE.png"/>
+                                <connections>
+                                    <action selector="favPressed" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="TL0-j8-bm9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -137,6 +145,7 @@
                     <connections>
                         <outlet property="detailSegment" destination="jN2-61-ejH" id="0Rh-Cf-SqP"/>
                         <outlet property="drinkImg" destination="c2O-lo-tcT" id="hUA-fm-Lms"/>
+                        <outlet property="favButton" destination="vBi-JE-OLp" id="s8R-at-Jh8"/>
                         <outlet property="image" destination="WyT-4m-dmc" id="WbK-fp-juP"/>
                         <outlet property="instructionsLabel" destination="6jP-r1-Ik0" id="NQk-PO-Ex4"/>
                         <outlet property="label" destination="PKn-G9-eVb" id="Ssw-aW-YEU"/>
@@ -179,7 +188,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="213" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="dw2-Nd-x84">
-                                <rect key="frame" x="20" y="264" width="867" height="816"/>
+                                <rect key="frame" x="20" y="302" width="867" height="778"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -195,11 +204,12 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScO-Ys-RVR">
                                                     <rect key="frame" x="600" y="8" width="229" height="197"/>
                                                     <animations/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="mhV-LH-76g">
                                                     <rect key="frame" x="62" y="8" width="530" height="197"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="38"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="44"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -220,48 +230,104 @@
                                     <outlet property="delegate" destination="Kmb-Xo-4Kc" id="KtF-u5-ebu"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Taste" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuw-fP-WRt">
-                                <rect key="frame" x="629" y="8" width="663" height="152"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="78"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7J-xg-hhh">
-                                <rect key="frame" x="981" y="474" width="919" height="333"/>
+                                <rect key="frame" x="981" y="474" width="893" height="333"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mwu-lr-Ztd">
-                                <rect key="frame" x="20" y="163" width="1880" height="70"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nr0-eV-vEb">
+                                <rect key="frame" x="294" y="171" width="1332" height="70"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
-                                    <segment title=""/>
+                                    <segment title="Bourbon"/>
+                                    <segment title="Gin"/>
+                                    <segment title="Light Rum"/>
+                                    <segment title="Dark Rum"/>
+                                    <segment title="Tequila"/>
+                                    <segment title="Vodka"/>
                                 </segments>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="3Oh-td-K3G" appends="YES" id="AX8-oJ-xI7"/>
+                                </connections>
                             </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xOs-hW-bBb">
+                                <rect key="frame" x="407" y="171" width="1107" height="70"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Afternoon"/>
+                                    <segment title="Evening"/>
+                                    <segment title="Pre-Dinner"/>
+                                    <segment title="After Dinner"/>
+                                </segments>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="NIm-Mw-8Mg" appends="YES" id="BzP-pJ-OhP"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mwu-lr-Ztd">
+                                <rect key="frame" x="20" y="189" width="1880" height="70"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Berry"/>
+                                    <segment title="Bitter"/>
+                                    <segment title="Fresh"/>
+                                    <segment title="Fruity"/>
+                                    <segment title="Herb"/>
+                                    <segment title="Sour"/>
+                                    <segment title="Spicy"/>
+                                    <segment title="Sweet"/>
+                                </segments>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="OIZ-0j-NVY" appends="YES" id="TVL-KX-Xw1"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Taste" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuw-fP-WRt">
+                                <rect key="frame" x="629" y="14" width="663" height="152"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="102"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="ingredientsLabel" destination="C7J-xg-hhh" id="pQe-Tv-0KL"/>
+                        <outlet property="occaSegment" destination="xOs-hW-bBb" id="Ans-mh-4R7"/>
                         <outlet property="segmentController" destination="mwu-lr-Ztd" id="yaa-Qy-2xz"/>
+                        <outlet property="spiritSegment" destination="nr0-eV-vEb" id="5JN-Sa-CkF"/>
                         <outlet property="tableView" destination="dw2-Nd-x84" id="AQt-VT-9Tc"/>
+                        <outlet property="titleLabel" destination="tuw-fP-WRt" id="FGn-hd-8I9"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="toMain" animates="NO" id="Vaf-jP-P16"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C3e-9y-ov8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="OIZ-0j-NVY">
+                    <pressTypeMask key="allowedPressTypes" select="YES"/>
+                    <connections>
+                        <action selector="segPressed:" destination="Kmb-Xo-4Kc" id="NBx-aR-qeB"/>
+                        <outlet property="delegate" destination="Kmb-Xo-4Kc" id="mA6-8F-1hc"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="3Oh-td-K3G">
+                    <pressTypeMask key="allowedPressTypes" select="YES"/>
+                    <connections>
+                        <action selector="segPressed:" destination="Kmb-Xo-4Kc" id="OfF-53-12f"/>
+                        <outlet property="delegate" destination="Kmb-Xo-4Kc" id="nwI-8V-VSd"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="NIm-Mw-8Mg">
+                    <pressTypeMask key="allowedPressTypes" select="YES"/>
+                    <connections>
+                        <action selector="segPressed:" destination="Kmb-Xo-4Kc" id="450-V8-jsu"/>
+                        <outlet property="delegate" destination="Kmb-Xo-4Kc" id="Yqj-2w-1vr"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2263" y="337"/>
         </scene>
@@ -269,6 +335,7 @@
     <resources>
         <image name="BG2.png" width="5760" height="3240"/>
         <image name="EmptyB.png" width="1194" height="387"/>
+        <image name="HeartE.png" width="261" height="240"/>
         <image name="Shelf3.png" width="1731" height="261"/>
         <image name="drinkImg.png" width="609" height="744"/>
     </resources>

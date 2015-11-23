@@ -11,26 +11,28 @@ import UIKit
 var nameArray = [String]()
 var imageArray = [NSData]()
 var idArray = [String]()
-var setSeg = 0
+var setSeg = 3
+var favIDArray = [String]()
 
 class NavController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
     
     @IBOutlet weak var segmentController: UISegmentedControl!
+    @IBOutlet weak var spiritSegment: UISegmentedControl!
+    @IBOutlet weak var occaSegment: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var ingredientsLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        segmentController.layer.borderColor = UIColor.whiteColor().CGColor
-        segmentController.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
-        segmentController.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
-        
+        segmentController.hidden = true
+        spiritSegment.hidden = true
+        occaSegment.hidden = true
+    
         setupSegment(setSeg)
-        
-        
-        
     }
     
     
@@ -44,6 +46,44 @@ class NavController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             ingredientsLabel.text = ingredientsArray[index!]
             
         }
+    }
+    
+    
+    
+    @IBAction func segPressed(sender: UITapGestureRecognizer) {
+        
+        if setSeg == 0 {
+            
+            if spiritSegment.selectedSegmentIndex == 2 {
+                
+                downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "", spirit: "light-rum", fromNav: false)
+                
+            } else if spiritSegment.selectedSegmentIndex == 3 {
+                
+                downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "", spirit: "dark-rum", fromNav: false)
+                
+                
+            } else if spiritSegment.selectedSegmentIndex == 5 {
+                downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "", spirit: "absolut-vodka", fromNav: false)
+            
+                
+            } else {
+            
+                downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "", spirit: (spiritSegment.titleForSegmentAtIndex(spiritSegment.selectedSegmentIndex)?.lowercaseStringWithLocale(NSLocale(localeIdentifier: "en_US")))!, fromNav: false)
+            
+        }
+        
+        } else if setSeg == 1 {
+           
+             downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: (segmentController.titleForSegmentAtIndex(segmentController.selectedSegmentIndex)?.lowercaseStringWithLocale(NSLocale(localeIdentifier: "en_US")))!, occasion: "", spirit: "", fromNav: false)
+            
+        } else if setSeg == 2 {
+            
+            
+        }
+        
+        
+        
     }
     
     
@@ -64,8 +104,10 @@ class NavController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.drinkImg.image = UIImage(data: imageArray[indexPath.row])
             
             let backgroundView = UIView()
-            backgroundView.backgroundColor = UIColor.clearColor()
+            backgroundView.backgroundColor = UIColor.blackColor()
             cell.selectedBackgroundView = backgroundView
+            
+            cell.drinkImg.layer.cornerRadius = 15.0
             
             return cell
             
@@ -74,6 +116,8 @@ class NavController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return CustomCell()
 
     }
+    
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameArray.count
@@ -85,42 +129,63 @@ class NavController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         if set == 0 {
             
-            segmentController.setTitle("Bourbon", forSegmentAtIndex: 0)
-            segmentController.setTitle("Gin", forSegmentAtIndex: 1)
-            segmentController.setTitle("Light Rum", forSegmentAtIndex: 2)
-            segmentController.setTitle("Dark Rum", forSegmentAtIndex: 3)
-            segmentController.setTitle("Tequila", forSegmentAtIndex: 4)
-            segmentController.setTitle("Vodka", forSegmentAtIndex: 5) //
+            spiritSegment.hidden = false
+            segmentController.hidden = true
+            occaSegment.hidden = true
+            
+            titleLabel.text = "Spirits"
+            
+            spiritSegment.layer.borderColor = UIColor.whiteColor().CGColor
+            spiritSegment.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
+            spiritSegment.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
             
             
-        downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "", spirit: "bouron")
+        downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "", spirit: "bourbon", fromNav: false)
             
         } else if set == 1 {
-        
-            segmentController.setTitle("Berry", forSegmentAtIndex: 0)
-            segmentController.setTitle("Bitter", forSegmentAtIndex: 1)
-            segmentController.setTitle("Fresh", forSegmentAtIndex: 2)
-            segmentController.setTitle("Fruity", forSegmentAtIndex: 3)
-            segmentController.setTitle("Herb", forSegmentAtIndex: 4)
-            segmentController.setTitle("Palpable", forSegmentAtIndex: 5)
-            segmentController.setTitle("Sour", forSegmentAtIndex: 6)
-            segmentController.setTitle("Spicy", forSegmentAtIndex: 7)
-            segmentController.setTitle("Sweet", forSegmentAtIndex: 8)
             
-            downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "sweet", occasion: "", spirit: "")
+            spiritSegment.hidden = true
+            segmentController.hidden = false
+            occaSegment.hidden = true
+
+            titleLabel.text = "Taste"
+            
+           segmentController.layer.borderColor = UIColor.whiteColor().CGColor
+            segmentController.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
+            segmentController.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
+            
+            
+            downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "sweet", occasion: "", spirit: "", fromNav: false)
             
         } else if set == 2 {
-            segmentController.setTitle("Afternoon", forSegmentAtIndex: 0)
-            segmentController.setTitle("Evening", forSegmentAtIndex: 1)
-            segmentController.setTitle("Pre-Dinner", forSegmentAtIndex: 2)
-            segmentController.setTitle("After Dinner", forSegmentAtIndex: 3)
             
-            downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "afternoon", spirit: "")
+            spiritSegment.hidden = true
+            segmentController.hidden = true
+            occaSegment.hidden = false
+            
+            titleLabel.text = "Occasions"
+            
+            occaSegment.layer.borderColor = UIColor.whiteColor().CGColor
+            occaSegment.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
+            occaSegment.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
+            
+            downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "afternoon", spirit: "", fromNav: false)
 
 
+        } else if set == 3 {
+            var favsIDs = ""
+            var counter = 0
+            for i in favIDArray {
+                if counter >= 1 {
+                favsIDs = favsIDs + ",\(i)"
+                } else {
+                    favsIDs = favsIDs + "\(i)"
+                }
+                counter++
+            }
+          print(favsIDs)
+            downloadData(favsIDs, title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "", spirit: "", fromNav: true)
         }
-
-            //http://addb.absolutdrinks.com/occasions/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554
 
     }
     

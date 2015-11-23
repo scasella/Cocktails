@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-func downloadData(id: String, title: UILabel, image: UIImageView, story: UILabel, instructions: UILabel, table: UITableView!, placeholder: UIImageView, taste: String, occasion: String, spirit: String) {
+func downloadData(id: String, title: UILabel, image: UIImageView, story: UILabel, instructions: UILabel, table: UITableView!, placeholder: UIImageView, taste: String, occasion: String, spirit: String, fromNav:Bool) {
 
     ingredientsArray.removeAll()
     nameArray.removeAll()
@@ -44,7 +44,7 @@ if data != nil {
             
             var tempText = ""
             
-            if id == "" {
+            if id == "" || fromNav == true {
             for ingredient in (ingFormat["ingredients"] as? NSArray)! {
                 let ingFormat = ingredient as! [String:String]
                     tempText = tempText + "\(ingFormat["textPlain"]!), "
@@ -70,7 +70,7 @@ if data != nil {
     
             if let items = jsonData["result"] as? NSArray {
                 
-            if items.count == 1  {
+            if items.count == 1  && fromNav == false {
             
             for item in items {
                 
@@ -94,7 +94,7 @@ if data != nil {
                         
                         table.reloadData()
                        
-                    }
+                }
                 
                  let downloadImg = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-white/floor-reflection/\(id).png")!)!)
                
@@ -105,7 +105,7 @@ if data != nil {
 
                 }
                 
-            } else if items.count > 1 {
+            } else if items.count > 1 || fromNav == true {
                 
                 for item in items {
                     
@@ -113,11 +113,11 @@ if data != nil {
                     
                     idArray.append(idPull)
                     nameArray.append(item["name"]! as! String)
-                    ingredientsArray.append(item["descriptionPlain"]! as! String)
+                   // ingredientsArray.append(item["descriptionPlain"]! as! String)
                     
-                    if let _ = NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-black/172x167/\(idPull)(40).jpg")!) {
+                    if let _ = NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/229x197/\(idPull)(50).jpg")!) {
                     
-                    imageArray.append(NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-black/172x167/\(idPull)(40).jpg")!)!)
+                    imageArray.append(NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/229x197/\(idPull)(50).jpg")!)!)
                     
                     } else {
                         imageArray.append(NSData())

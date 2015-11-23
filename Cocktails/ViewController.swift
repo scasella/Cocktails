@@ -26,6 +26,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var detailSegment: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var favButton: UIButton!
+    
+    
     
     override func viewDidLoad() {
           super.viewDidLoad()
@@ -35,6 +38,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         segmentControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
          segmentControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
         
+        if favIDArray.indexOf(id) != nil {
+            favButton.setImage(UIImage(named: "HeartF.png"), forState: UIControlState.Normal)
+            favButton.userInteractionEnabled = false
+        }
+        
        
      // Do any additional setup after loading the view, typically from a nib.
     }
@@ -42,7 +50,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidAppear(animated: Bool) {
         
       
-        downloadData(id, title: label, image: image, story: story, instructions: instructionsLabel, table: tableView, placeholder: drinkImg, taste: "", occasion: "", spirit: "")
+        downloadData(id, title: label, image: image, story: story, instructions: instructionsLabel, table: tableView, placeholder: drinkImg, taste: "", occasion: "", spirit: "", fromNav: false)
 
     }
 
@@ -53,8 +61,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     @IBAction func navBarPressed(sender: UITapGestureRecognizer) {
-        if segmentControl.selectedSegmentIndex == 0 || segmentControl.selectedSegmentIndex == 1 || segmentControl.selectedSegmentIndex == 2 {
+        if segmentControl.selectedSegmentIndex == 0 || segmentControl.selectedSegmentIndex == 1 || segmentControl.selectedSegmentIndex == 2 || segmentControl.selectedSegmentIndex == 3 {
             
             setSeg = segmentControl.selectedSegmentIndex
             performSegueWithIdentifier("toNav", sender: self)
@@ -65,7 +75,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    
+    @IBAction func favPressed() {
+        favButton.setImage(UIImage(named: "HeartF.png"), forState: UIControlState.Normal)
+        favIDArray.append(id)
+        NSUserDefaults.standardUserDefaults().setObject(favIDArray, forKey: "favIDArray")
+    }
+    
+    
+    
+    var overFocus = false
+    
     @IBAction func showButtonPressed() {
+        overFocus = true
+        showButton.userInteractionEnabled = false 
         showButton.hidden = true
         UIView.animateWithDuration(1.5, animations: { () -> Void in
             self.image.transform.tx = -500
@@ -80,16 +103,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }) { (Bool) -> Void in
           
                 self.detailSegment.hidden = false
+                self.favButton.hidden = false
                 self.tableView.hidden = false
                 self.instructionsLabel.hidden = false
                 self.story.hidden = true
-                //self.story.setNeedsUpdateConstraints()
-               
-               self.story.layoutIfNeeded()
                 
         }
+        self.setNeedsFocusUpdate()
+        self.updateFocusIfNeeded()
         
     }
+    
+    
+    
+    override weak var preferredFocusedView: UIView? {
+        if overFocus == true {
+            detailSegment.selectedSegmentIndex = 1
+            return detailSegment
+        }
+        return showButton
+        }
     
     
     
@@ -109,6 +142,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
+    
+    
     @IBAction func detailSegAction(sender: AnyObject) {
         if detailSegment.selectedSegmentIndex == 1 {
            
@@ -124,9 +159,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ingredientsArray.count
     }
+    
     
     
     override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
@@ -136,7 +173,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let prev = context.previouslyFocusedView as? UIButton {
             
+            if prev.restorationIdentifier == "Show" {
             prev.setImage(UIImage(named: "EmptyB.png"), forState: UIControlState.Normal)
+            } else {
+              prev.layer.frame.size.width = 150
+              prev.layer.frame.size.height = 102
+            }
             
            /* UIView.animateWithDuration(0.5, animations: { () -> Void in
             
@@ -148,7 +190,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let next = context.nextFocusedView as? UIButton {
             
-             next.setImage(UIImage(named: "FullB.png"), forState: UIControlState.Normal)
+            
+            if next.restorationIdentifier == "Show" {
+                next.setImage(UIImage(named: "FullB.png"), forState: UIControlState.Normal)
+            } else {
+                next.layer.frame.size.width = 200
+                next.layer.frame.size.height = 152
+            }
+            
             
            /* UIView.animateWithDuration(0.5, animations: { () -> Void in
                 next.movieLbl.frame.size = self.titleFocusSize
