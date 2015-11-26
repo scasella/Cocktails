@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if NSUserDefaults.standardUserDefaults().objectForKey("favIDArray") != nil {
             favIDArray = NSUserDefaults.standardUserDefaults().objectForKey("favIDArray") as! [String]
         }
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("defaultID") != nil {
+            defaultID = NSUserDefaults.standardUserDefaults().objectForKey("defaultID") as! String
+        }
+
         // Override point for customization after application launch.
         return true
     }

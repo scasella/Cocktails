@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,12 +16,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KgI-vX-QJW">
+                                <rect key="frame" x="0.0" y="107" width="1920" height="973"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BG2.png" translatesAutoresizingMaskIntoConstraints="NO" id="GEp-ja-9CL">
+                                        <rect key="frame" x="0.0" y="-9" width="1920" height="982"/>
+                                        <animations/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to Topshelf " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z61-7M-Ats">
+                                        <rect key="frame" x="539" y="68" width="843" height="256"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="82"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="drinkImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="YFM-xu-wfP">
+                                        <rect key="frame" x="894" y="279" width="132" height="150"/>
+                                        <animations/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap an option above to browse drinks." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdK-NT-rqA">
+                                        <rect key="frame" x="485" y="452" width="951" height="117"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BG2.png" translatesAutoresizingMaskIntoConstraints="NO" id="VVE-1P-eMa">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                                 <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Show" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cob-Vj-dGL">
-                                <rect key="frame" x="774" y="914" width="373" height="137"/>
+                                <rect key="frame" x="774" y="899" width="373" height="137"/>
                                 <animations/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                 <state key="normal" title="Button" image="EmptyB.png"/>
@@ -34,20 +63,20 @@
                                 <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XDf-3u-Yzn">
-                                <rect key="frame" x="380" y="650" width="1161" height="298"/>
+                                <rect key="frame" x="380" y="650" width="1161" height="269"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="38"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ouo-xK-PaS">
+                            <segmentedControl opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ouo-xK-PaS">
                                 <rect key="frame" x="123" y="1" width="1676" height="70"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.15314068512721823" green="0.15753618942748288" blue="0.29724984217171713" alpha="1" colorSpace="calibratedRGB"/>
                                 <segments>
-                                    <segment title="Spirit"/>
-                                    <segment title="Taste"/>
-                                    <segment title="Occasion"/>
+                                    <segment title="Spirits"/>
+                                    <segment title="Tastes"/>
+                                    <segment title="Occasions"/>
                                     <segment title="Favorites"/>
                                     <segment title="Search"/>
                                 </segments>
@@ -61,8 +90,8 @@
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jP-r1-Ik0">
-                                <rect key="frame" x="1140" y="725" width="678" height="155"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="6jP-r1-Ik0">
+                                <rect key="frame" x="1140" y="725" width="678" height="252"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -129,13 +158,24 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Fav" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-JE-OLp">
-                                <rect key="frame" x="1379" y="870" width="150" height="102"/>
+                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Fav" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-JE-OLp">
+                                <rect key="frame" x="353" y="715" width="210" height="90"/>
                                 <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Button" image="HeartE.png"/>
+                                <state key="normal" title="Favorite"/>
                                 <connections>
                                     <action selector="favPressed" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="TL0-j8-bm9"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Default" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlX-yi-RXx">
+                                <rect key="frame" x="353" y="827" width="210" height="90"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Default"/>
+                                <connections>
+                                    <action selector="defaultPressed" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="lUq-1G-vV6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -143,12 +183,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="defaultButton" destination="mlX-yi-RXx" id="qi7-Wq-vLU"/>
                         <outlet property="detailSegment" destination="jN2-61-ejH" id="0Rh-Cf-SqP"/>
                         <outlet property="drinkImg" destination="c2O-lo-tcT" id="hUA-fm-Lms"/>
                         <outlet property="favButton" destination="vBi-JE-OLp" id="s8R-at-Jh8"/>
                         <outlet property="image" destination="WyT-4m-dmc" id="WbK-fp-juP"/>
                         <outlet property="instructionsLabel" destination="6jP-r1-Ik0" id="NQk-PO-Ex4"/>
                         <outlet property="label" destination="PKn-G9-eVb" id="Ssw-aW-YEU"/>
+                        <outlet property="onboardView" destination="KgI-vX-QJW" id="o5o-JU-Ec6"/>
                         <outlet property="segmentControl" destination="ouo-xK-PaS" id="Ril-M6-zBU"/>
                         <outlet property="shelfImg" destination="OM4-NR-T3H" id="IwA-w9-4Me"/>
                         <outlet property="showButton" destination="Cob-Vj-dGL" id="S47-GG-1cT"/>
@@ -286,7 +328,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Taste" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuw-fP-WRt">
-                                <rect key="frame" x="629" y="14" width="663" height="152"/>
+                                <rect key="frame" x="629" y="11" width="663" height="152"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="102"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -335,7 +377,6 @@
     <resources>
         <image name="BG2.png" width="5760" height="3240"/>
         <image name="EmptyB.png" width="1194" height="387"/>
-        <image name="HeartE.png" width="261" height="240"/>
         <image name="Shelf3.png" width="1731" height="261"/>
         <image name="drinkImg.png" width="609" height="744"/>
     </resources>

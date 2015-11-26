@@ -10,28 +10,40 @@ import UIKit
 import AVFoundation
 
 func downloadData(id: String, title: UILabel, image: UIImageView, story: UILabel, instructions: UILabel, table: UITableView!, placeholder: UIImageView, taste: String, occasion: String, spirit: String, fromNav:Bool) {
-
+    
+    //table.userInteractionEnabled = false
+   
     ingredientsArray.removeAll()
     nameArray.removeAll()
     idArray.removeAll()
     imageArray.removeAll()
     
+    table.reloadData()
+
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
     
 var mappedURLString = ""
+    
+    if nameSearch != "" {
+  
+        mappedURLString = "http://addb.absolutdrinks.com/quickSearch/drinks/\(nameSearch)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+        nameSearch = ""
+   
+    } else {
 
-if id != "" {
+        if id != "" {
     
- mappedURLString = "http://addb.absolutdrinks.com/drinks/" + id + "/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+            mappedURLString = "http://addb.absolutdrinks.com/drinks/" + id + "/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
     
-} else if taste != "" {
-    mappedURLString = "http://addb.absolutdrinks.com/drinks/tasting/\(taste)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
-} else if occasion != "" {
-    mappedURLString = "http://addb.absolutdrinks.com/drinks/for/\(occasion)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
-} else if spirit != "" {
-    mappedURLString = "http://addb.absolutdrinks.com/drinks/with/\(spirit)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
-}
-    
+        } else if taste != "" {
+            mappedURLString = "http://addb.absolutdrinks.com/drinks/tasting/\(taste)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+        } else if occasion != "" {
+            mappedURLString = "http://addb.absolutdrinks.com/drinks/for/\(occasion)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+        } else if spirit != "" {
+            mappedURLString = "http://addb.absolutdrinks.com/drinks/with/\(spirit)/?apiKey=c2c7c5a8a6ef4985a3e35301cde21554"
+        }
+    }
+        
 let mappedURL = NSURL(string: mappedURLString)
 
 let data = NSData(contentsOfURL: mappedURL!)
@@ -43,13 +55,22 @@ if data != nil {
         for ingFormat in (jsonData["result"]! as? NSArray)! {
             
             var tempText = ""
+            var counter = 0
             
             if id == "" || fromNav == true {
+            let ingCount = (ingFormat["ingredients"] as? NSArray)!.count
             for ingredient in (ingFormat["ingredients"] as? NSArray)! {
+                counter++
                 let ingFormat = ingredient as! [String:String]
+                
+                if counter == ingCount {
+                   
+                    tempText = tempText + "\(ingFormat["textPlain"]!)"
+
+                } else {
                     tempText = tempText + "\(ingFormat["textPlain"]!), "
               
-            }
+                } }
                 
                 ingredientsArray.append(tempText)
   
@@ -125,9 +146,13 @@ if data != nil {
                     
                     dispatch_sync(dispatch_get_main_queue()){
                         table.reloadData()
+                        table.userInteractionEnabled = true
+                        
                     }
+                   
                     
                 }
+               
                 
             }
 

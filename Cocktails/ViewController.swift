@@ -13,6 +13,9 @@ import AVFoundation
 var id = "old-fashioned"
 var videoURL = "http://assets.absolutdrinks.com/videos/absolut-cosmopolitan.mp4"
 var ingredientsArray = [String]()
+var defaultID = ""
+var startUp = true
+var nameSearch = ""
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -27,6 +30,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var detailSegment: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var favButton: UIButton!
+    @IBOutlet weak var defaultButton: UIButton!
+    @IBOutlet weak var onboardView: UIView!
     
     
     
@@ -38,20 +43,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         segmentControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
          segmentControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
         
-        if favIDArray.indexOf(id) != nil {
-            favButton.setImage(UIImage(named: "HeartF.png"), forState: UIControlState.Normal)
-            favButton.userInteractionEnabled = false
-        }
-        
        
      // Do any additional setup after loading the view, typically from a nib.
     }
     
+    
+    
     override func viewDidAppear(animated: Bool) {
         
-      
-        downloadData(id, title: label, image: image, story: story, instructions: instructionsLabel, table: tableView, placeholder: drinkImg, taste: "", occasion: "", spirit: "", fromNav: false)
+        
+        if favIDArray.indexOf(id) != nil {
+            favButton.setTitle("Unfavorite", forState: UIControlState.Normal)
+            //favButton.userInteractionEnabled = false
+        }
+        
+        if startUp == true {
+        if defaultID != "" {
+        downloadData(defaultID, title: label, image: image, story: story, instructions: instructionsLabel, table: tableView, placeholder: drinkImg, taste: "", occasion: "", spirit: "", fromNav: false)
+            
+        } else {
+            onboardView.hidden = false
+        }
+         
+       startUp = false
+        } else {
+            downloadData(id, title: label, image: image, story: story, instructions: instructionsLabel, table: tableView, placeholder: drinkImg, taste: "", occasion: "", spirit: "", fromNav: false)
 
+        }
     }
 
     
@@ -69,17 +87,71 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             setSeg = segmentControl.selectedSegmentIndex
             performSegueWithIdentifier("toNav", sender: self)
             
+        } else {
+            //Search name alert view
+            var tField: UITextField!
+            
+            func configurationTextField(textField: UITextField!)
+            {
+                textField.placeholder = "Enter an item"
+                tField = textField
+            }
+            
+            
+            func handleCancel(alertView: UIAlertAction!)
+            {
+            }
+            
+            let alert = UIAlertController(title: "Search by Drink Name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler:handleCancel))
+            alert.addTextFieldWithConfigurationHandler(configurationTextField)
+                        alert.addAction(UIAlertAction(title: "Search", style: UIAlertActionStyle.Default, handler:{ (UIAlertAction)in
+                nameSearch = (tField.text as String!).lowercaseStringWithLocale(NSLocale(localeIdentifier: "en_US"))
+                self.performSegueWithIdentifier("toNav", sender: self)
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: {
+                
+            })
         }
         
-        
+        //
     }
     
     
     
     @IBAction func favPressed() {
-        favButton.setImage(UIImage(named: "HeartF.png"), forState: UIControlState.Normal)
+        
+         if favIDArray.indexOf(id) == nil {
+        favButton.setTitle("Unfavorite", forState: UIControlState.Normal)
         favIDArray.append(id)
         NSUserDefaults.standardUserDefaults().setObject(favIDArray, forKey: "favIDArray")
+        defaultButton.hidden = false
+            
+            if favIDArray.count == 1 {
+               defaultID = id
+               NSUserDefaults.standardUserDefaults().setObject(defaultID, forKey: "defaultID")
+               defaultButton.enabled = false
+            }
+            
+         } else {
+            favButton.setTitle("Favorite", forState: UIControlState.Normal)
+            favIDArray.removeAtIndex(favIDArray.indexOf(id)!)
+            defaultButton.hidden = true
+            if defaultID == id {
+                defaultID = ""
+                NSUserDefaults.standardUserDefaults().setObject(defaultID, forKey: "defaultID")
+            }
+            NSUserDefaults.standardUserDefaults().setObject(favIDArray, forKey: "favIDArray")
+        }
+    }
+    
+    
+    
+     @IBAction func defaultPressed() {
+        defaultID = id
+        NSUserDefaults.standardUserDefaults().setObject(defaultID, forKey: defaultID)
+        defaultButton.enabled = false
     }
     
     
@@ -108,11 +180,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.instructionsLabel.hidden = false
                 self.story.hidden = true
                 
+                if favIDArray.indexOf(id) != nil {
+                self.defaultButton.hidden = false
+                if id == defaultID {
+                    self.defaultButton.enabled = false
+                    }
+                }
         }
         self.setNeedsFocusUpdate()
         self.updateFocusIfNeeded()
         
-    }
+        }
     
     
     
@@ -146,13 +224,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func detailSegAction(sender: AnyObject) {
         if detailSegment.selectedSegmentIndex == 1 {
+            
+            if videoURL != "" {
            
             let player = AVPlayer(URL: NSURL(string: videoURL)!)
             let playerViewController = AVPlayerViewController()
             playerViewController.player = player
             self.presentViewController(playerViewController, animated: true) {
                 playerViewController.player!.play()
-            } } else {
+                } } else {
+                
+                let alert = UIAlertController(title: "Video unavailable.", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                presentViewController(alert, animated: true, completion: nil)
+            }
+            
+            } else {
                 
         }
         
@@ -161,6 +247,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if ingredientsArray.count < 6 {
+            tableView.userInteractionEnabled = false 
+        }
         return ingredientsArray.count
     }
     
@@ -175,9 +264,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             if prev.restorationIdentifier == "Show" {
             prev.setImage(UIImage(named: "EmptyB.png"), forState: UIControlState.Normal)
-            } else {
-              prev.layer.frame.size.width = 150
-              prev.layer.frame.size.height = 102
+            } else if prev.restorationIdentifier == "Fav"{
+            //  prev.layer.frame.size.width = 150
+              //prev.layer.frame.size.height = 102
             }
             
            /* UIView.animateWithDuration(0.5, animations: { () -> Void in
@@ -193,9 +282,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             if next.restorationIdentifier == "Show" {
                 next.setImage(UIImage(named: "FullB.png"), forState: UIControlState.Normal)
-            } else {
-                next.layer.frame.size.width = 200
-                next.layer.frame.size.height = 152
+            } else if next.restorationIdentifier == "Fav"{
+            //    next.layer.frame.size.width = 200
+              //  next.layer.frame.size.height = 152
             }
             
             
