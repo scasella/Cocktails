@@ -36,6 +36,8 @@ class NavController: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func viewWillAppear(animated: Bool) {
         
+        navCounter = 0
+        
         ingredientsArray.removeAll()
         nameArray.removeAll()
         idArray.removeAll()
@@ -99,11 +101,22 @@ class NavController: UIViewController, UITableViewDelegate, UITableViewDataSourc
              downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: (segmentController.titleForSegmentAtIndex(segmentController.selectedSegmentIndex)?.lowercaseStringWithLocale(NSLocale(localeIdentifier: "en_US")))!, occasion: "", spirit: "", fromNav: false)
             
         } else if setSeg == 2 {
-            //NEED TO SET UP OCCASIONS
             
+            if occaSegment.selectedSegmentIndex == 0 {
+                downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "afternoon", spirit: "", fromNav: false)
+                
+            } else if occaSegment.selectedSegmentIndex == 1 {
+        
+                    downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "evening", spirit: "", fromNav: false)
+            
+        
+            } else if occaSegment.selectedSegmentIndex == 2 {
+                downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "pre-dinner", spirit: "", fromNav: false)
+           
+            } else if occaSegment.selectedSegmentIndex == 3 {
+                downloadData("", title: UILabel(), image: UIImageView(), story: UILabel(), instructions: UILabel(), table: tableView, placeholder: UIImageView(), taste: "", occasion: "after-dinner", spirit: "", fromNav: false)
+            }
         }
-        
-        
         
     }
     

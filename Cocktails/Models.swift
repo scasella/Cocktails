@@ -9,17 +9,16 @@
 import UIKit
 import AVFoundation
 
+var navCounter = 0
+
 func downloadData(id: String, title: UILabel, image: UIImageView, story: UILabel, instructions: UILabel, table: UITableView!, placeholder: UIImageView, taste: String, occasion: String, spirit: String, fromNav:Bool) {
     
-    //table.userInteractionEnabled = false
-   
-    ingredientsArray.removeAll()
-    nameArray.removeAll()
-    idArray.removeAll()
-    imageArray.removeAll()
+    navCounter++
     
-    table.reloadData()
+    let navCount = navCounter
 
+    table.userInteractionEnabled = false
+  
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
     
 var mappedURLString = ""
@@ -52,6 +51,8 @@ if data != nil {
     
     do { let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
         
+        ingredientsArray.removeAll()
+        
         for ingFormat in (jsonData["result"]! as? NSArray)! {
             
             var tempText = ""
@@ -60,6 +61,7 @@ if data != nil {
             if id == "" || fromNav == true {
             let ingCount = (ingFormat["ingredients"] as? NSArray)!.count
             for ingredient in (ingFormat["ingredients"] as? NSArray)! {
+               
                 counter++
                 let ingFormat = ingredient as! [String:String]
                 
@@ -70,14 +72,15 @@ if data != nil {
                 } else {
                     tempText = tempText + "\(ingFormat["textPlain"]!), "
               
-                } }
+                }
+                
+                }
                 
                 ingredientsArray.append(tempText)
-  
-                
+            
             } else {
                 
-                for ingredient in (ingFormat["ingredients"] as? NSArray)! {
+            for ingredient in (ingFormat["ingredients"] as? NSArray)! {
                     let ingFormat = ingredient as! [String:String]
                     ingredientsArray.append(ingFormat["textPlain"]!)
 
@@ -117,7 +120,13 @@ if data != nil {
                        
                 }
                 
-                 let downloadImg = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-white/floor-reflection/\(id).png")!)!)
+                var downloadImg = UIImage()
+                
+                if UIImage(data: NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-white/floor-reflection/\(id).png")!)!) != nil {
+                
+                downloadImg = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/transparent-background-white/floor-reflection/\(id).png")!)!)!
+                    
+                }
                
                 dispatch_sync(dispatch_get_main_queue()){
                     placeholder.hidden = true 
@@ -128,7 +137,14 @@ if data != nil {
                 
             } else if items.count > 1 || fromNav == true {
                 
+            
+                nameArray.removeAll()
+                idArray.removeAll()
+                imageArray.removeAll()
+      
                 for item in items {
+                    
+                    if navCount == navCounter {
                     
                     let idPull = item["id"]! as! String
                     
@@ -141,7 +157,7 @@ if data != nil {
                     imageArray.append(NSData(contentsOfURL: NSURL(string: "http://assets.absolutdrinks.com/drinks/229x197/\(idPull)(50).jpg")!)!)
                     
                     } else {
-                        imageArray.append(NSData())
+                    imageArray.append(NSData(contentsOfFile: "drinkImg.png")!)
                     }
                     
                     dispatch_sync(dispatch_get_main_queue()){
@@ -150,7 +166,9 @@ if data != nil {
                         
                     }
                    
-                    
+                    } else {
+                        return
+                    }
                 }
                
                 

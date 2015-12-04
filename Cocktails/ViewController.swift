@@ -10,8 +10,8 @@ import UIKit
 import AVKit
 import AVFoundation
 
-var id = "old-fashioned"
-var videoURL = "http://assets.absolutdrinks.com/videos/absolut-cosmopolitan.mp4"
+var id = ""
+var videoURL = ""
 var ingredientsArray = [String]()
 var defaultID = ""
 var startUp = true
@@ -37,38 +37,49 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
           super.viewDidLoad()
-        detailSegment.backgroundColor = UIColor(red: 32/255, green: 36/255, blue: 66/255, alpha: 1.0)
+        detailSegment.backgroundColor = UIColor(red: 37/255, green: 47/255, blue: 123/255, alpha: 1.0)
          detailSegment.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
         detailSegment.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
         segmentControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
          segmentControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
-        
+         segmentControl.backgroundColor = UIColor.blackColor()
+        segmentControl.alpha = 0.6
        
      // Do any additional setup after loading the view, typically from a nib.
     }
     
     
     
-    override func viewDidAppear(animated: Bool) {
-        
-        
-        if favIDArray.indexOf(id) != nil {
-            favButton.setTitle("Unfavorite", forState: UIControlState.Normal)
-            //favButton.userInteractionEnabled = false
-        }
+    override func viewWillAppear(animated: Bool) {
         
         if startUp == true {
         if defaultID != "" {
+        id = defaultID
         downloadData(defaultID, title: label, image: image, story: story, instructions: instructionsLabel, table: tableView, placeholder: drinkImg, taste: "", occasion: "", spirit: "", fromNav: false)
+
+         favButton.setTitle("Unfavorite", forState: UIControlState.Normal)
+                //favButton.userInteractionEnabled = false
+        
             
         } else {
             onboardView.hidden = false
         }
          
        startUp = false
+            
         } else {
+            
+            if favIDArray.indexOf(id) != nil {
+                favButton.setTitle("Unfavorite", forState: UIControlState.Normal)
+                //favButton.userInteractionEnabled = false
+                if id == defaultID {
+                    defaultButton.setTitle("Current default", forState: UIControlState.Normal)
+                    defaultButton.enabled = false
+                }
+            }
+            
             downloadData(id, title: label, image: image, story: story, instructions: instructionsLabel, table: tableView, placeholder: drinkImg, taste: "", occasion: "", spirit: "", fromNav: false)
-
+    
         }
     }
 
@@ -93,7 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             func configurationTextField(textField: UITextField!)
             {
-                textField.placeholder = "Enter an item"
+                textField.placeholder = "Enter a drink name"
                 tField = textField
             }
             
@@ -105,13 +116,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let alert = UIAlertController(title: "Search by Drink Name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler:handleCancel))
             alert.addTextFieldWithConfigurationHandler(configurationTextField)
-                        alert.addAction(UIAlertAction(title: "Search", style: UIAlertActionStyle.Default, handler:{ (UIAlertAction)in
+                alert.addAction(UIAlertAction(title: "Search", style: UIAlertActionStyle.Default, handler:{ (UIAlertAction)in
+                
+                if tField.text != nil {
+                                
                 nameSearch = (tField.text as String!).lowercaseStringWithLocale(NSLocale(localeIdentifier: "en_US"))
                 self.performSegueWithIdentifier("toNav", sender: self)
+                }
+                
             }))
             
             self.presentViewController(alert, animated: true, completion: {
-                
+                tField.becomeFirstResponder()
             })
         }
         
@@ -132,16 +148,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                defaultID = id
                NSUserDefaults.standardUserDefaults().setObject(defaultID, forKey: "defaultID")
                defaultButton.enabled = false
+               defaultButton.setTitle("Current default", forState: UIControlState.Normal)
             }
             
          } else {
-            favButton.setTitle("Favorite", forState: UIControlState.Normal)
-            favIDArray.removeAtIndex(favIDArray.indexOf(id)!)
-            defaultButton.hidden = true
+            favButton.setTitle("Add to favorites", forState: UIControlState.Normal)
+            
             if defaultID == id {
                 defaultID = ""
                 NSUserDefaults.standardUserDefaults().setObject(defaultID, forKey: "defaultID")
             }
+            
+            favIDArray.removeAtIndex(favIDArray.indexOf(id)!)
+            defaultButton.hidden = true
+            
             NSUserDefaults.standardUserDefaults().setObject(favIDArray, forKey: "favIDArray")
         }
     }
@@ -150,8 +170,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
      @IBAction func defaultPressed() {
         defaultID = id
-        NSUserDefaults.standardUserDefaults().setObject(defaultID, forKey: defaultID)
+        NSUserDefaults.standardUserDefaults().setObject(defaultID, forKey: "defaultID")
         defaultButton.enabled = false
+        defaultButton.setTitle("Current default", forState: UIControlState.Normal)
     }
     
     
@@ -184,6 +205,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.defaultButton.hidden = false
                 if id == defaultID {
                     self.defaultButton.enabled = false
+                    self.defaultButton.setTitle("Current default", forState: UIControlState.Normal)
                     }
                 }
         }
@@ -248,7 +270,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if ingredientsArray.count < 6 {
-            tableView.userInteractionEnabled = false 
+            tableView.userInteractionEnabled = false
+        } else {
+            tableView.userInteractionEnabled = true
         }
         return ingredientsArray.count
     }
@@ -263,7 +287,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let prev = context.previouslyFocusedView as? UIButton {
             
             if prev.restorationIdentifier == "Show" {
-            prev.setImage(UIImage(named: "EmptyB.png"), forState: UIControlState.Normal)
+            prev.setImage(UIImage(named: "BEN.png"), forState: UIControlState.Normal)
             } else if prev.restorationIdentifier == "Fav"{
             //  prev.layer.frame.size.width = 150
               //prev.layer.frame.size.height = 102
@@ -281,7 +305,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             
             if next.restorationIdentifier == "Show" {
-                next.setImage(UIImage(named: "FullB.png"), forState: UIControlState.Normal)
+                next.setImage(UIImage(named: "BFN2.png"), forState: UIControlState.Normal)
             } else if next.restorationIdentifier == "Fav"{
             //    next.layer.frame.size.width = 200
               //  next.layer.frame.size.height = 152
