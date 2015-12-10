@@ -20,6 +20,7 @@
 		8854E00F1C00BC2500E7B1F0 /* Shelf2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8854E00E1C00BC2500E7B1F0 /* Shelf2.png */; };
 		8854E0111C00D27E00E7B1F0 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8854E0101C00D27E00E7B1F0 /* Models.swift */; };
 		8855BEB01C016F6D00DCE6D7 /* NavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8855BEAF1C016F6D00DCE6D7 /* NavController.swift */; };
+		88D240FD1C1932E000EDB767 /* BG10.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D240FC1C1932E000EDB767 /* BG10.png */; };
 		88E421321C011D7F002CAB6D /* CustomerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E421311C011D7F002CAB6D /* CustomerCell.swift */; };
 		88E421351C012C27002CAB6D /* Shelf3.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E421331C012C27002CAB6D /* Shelf3.png */; };
 		88E421361C012C27002CAB6D /* BG2.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E421341C012C27002CAB6D /* BG2.png */; };
@@ -42,6 +43,7 @@
 		8854E00E1C00BC2500E7B1F0 /* Shelf2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shelf2.png; sourceTree = "<group>"; };
 		8854E0101C00D27E00E7B1F0 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		8855BEAF1C016F6D00DCE6D7 /* NavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
+		88D240FC1C1932E000EDB767 /* BG10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG10.png; sourceTree = "<group>"; };
 		88E421311C011D7F002CAB6D /* CustomerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerCell.swift; sourceTree = "<group>"; };
 		88E421331C012C27002CAB6D /* Shelf3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shelf3.png; sourceTree = "<group>"; };
 		88E421341C012C27002CAB6D /* BG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG2.png; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				8854DFF71C00B9CC00E7B1F0 /* AppDelegate.swift */,
 				882AC0131C112B7400BC3C7A /* BEN.png */,
 				882AC0171C112DBA00BC3C7A /* BFN2.png */,
+				88D240FC1C1932E000EDB767 /* BG10.png */,
 				882AC00F1C112A4400BC3C7A /* BG6.png */,
 				88E421331C012C27002CAB6D /* Shelf3.png */,
 				88E421341C012C27002CAB6D /* BG2.png */,
@@ -158,6 +161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D240FD1C1932E000EDB767 /* BG10.png in Resources */,
 				882AC0121C112AA100BC3C7A /* ShelfN.png in Resources */,
 				8854E00F1C00BC2500E7B1F0 /* Shelf2.png in Resources */,
 				88E421351C012C27002CAB6D /* Shelf3.png in Resources */,
@@ -295,7 +299,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Cocktails/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.scasella.Cocktails;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scasella.cocktails;
 				PRODUCT_NAME = "Cocktails TV";
 			};
 			name = Debug;
@@ -307,7 +311,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Cocktails/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.scasella.Cocktails;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scasella.cocktails;
 				PRODUCT_NAME = "Cocktails TV";
 			};
 			name = Release;

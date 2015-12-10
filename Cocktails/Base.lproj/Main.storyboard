@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BG6.png" translatesAutoresizingMaskIntoConstraints="NO" id="VVE-1P-eMa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BG10.png" translatesAutoresizingMaskIntoConstraints="NO" id="VVE-1P-eMa">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                                 <animations/>
                             </imageView>
@@ -123,7 +123,7 @@
                                 <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKn-G9-eVb">
-                                <rect key="frame" x="285" y="99" width="1353" height="111"/>
+                                <rect key="frame" x="285" y="97" width="1353" height="111"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="78"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -152,7 +152,7 @@
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KgI-vX-QJW">
                                 <rect key="frame" x="0.0" y="107" width="1920" height="973"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BG6.png" translatesAutoresizingMaskIntoConstraints="NO" id="GEp-ja-9CL">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BG10.png" translatesAutoresizingMaskIntoConstraints="NO" id="GEp-ja-9CL">
                                         <rect key="frame" x="0.0" y="-9" width="1920" height="982"/>
                                         <animations/>
                                     </imageView>
@@ -376,7 +376,7 @@
     </scenes>
     <resources>
         <image name="BEN.png" width="1194" height="387"/>
-        <image name="BG6.png" width="1920" height="1080"/>
+        <image name="BG10.png" width="1920" height="1080"/>
         <image name="ShelfN.png" width="740" height="107"/>
         <image name="drinkImg.png" width="609" height="744"/>
     </resources>

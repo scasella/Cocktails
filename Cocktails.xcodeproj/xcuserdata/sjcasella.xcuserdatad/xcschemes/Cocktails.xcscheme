@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8854DFF31C00B9CC00E7B1F0"
-               BuildableName = "Cocktails.app"
+               BuildableName = "Cocktails TV.app"
                BlueprintName = "Cocktails"
                ReferencedContainer = "container:Cocktails.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8854DFF31C00B9CC00E7B1F0"
-            BuildableName = "Cocktails.app"
+            BuildableName = "Cocktails TV.app"
             BlueprintName = "Cocktails"
             ReferencedContainer = "container:Cocktails.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8854DFF31C00B9CC00E7B1F0"
-            BuildableName = "Cocktails.app"
+            BuildableName = "Cocktails TV.app"
             BlueprintName = "Cocktails"
             ReferencedContainer = "container:Cocktails.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8854DFF31C00B9CC00E7B1F0"
-            BuildableName = "Cocktails.app"
+            BuildableName = "Cocktails TV.app"
             BlueprintName = "Cocktails"
             ReferencedContainer = "container:Cocktails.xcodeproj">
          </BuildableReference>
